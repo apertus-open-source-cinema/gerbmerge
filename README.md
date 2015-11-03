@@ -2,9 +2,7 @@
 
 <P><HR ALIGN=LEFT></P>
 
-
-
-
+<H2>What's New</H2>
 <p>In this latest release</p>
 <ul>
 <li>This version of Gerbmerge is based on the fork from https://github.com/provideyourown/gerbmerge</li>
@@ -21,7 +19,6 @@
 </ul>
 
 
-<H2>What's New</H2>
 <p>In release 1.9</p>
 <ul>
 <li>Added metric support</li>
