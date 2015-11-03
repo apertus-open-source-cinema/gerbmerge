@@ -47,6 +47,10 @@ Config = {
    'topmargin': 0,                   # Inches of extra room to leave on top side of panel for tooling
    'rightmargin': 0,                 # Inches of extra room to leave on right side of panel for tooling
    'bottommargin': 0,                # Inches of extra room to leave on bottom side of panel for tooling
+   'leftinset': 0,                   # Inches of extra room for left side positioning
+   'topinset': 0,                    # Inches of extra room for top side positioning
+   'rightinset': 0,                  # Inches of extra room for right side positioning
+   'bottominset': 0,                 # Inches of extra room for bottom side positioning
    'fiducialpoints': None,           # List of X,Y co-ordinates at which to draw fiducials
    'fiducialcopperdiameter': 0.08,   # Diameter of copper part of fiducial
    'fiducialmaskdiameter': 0.32,     # Diameter of fiducial soldermask opening
@@ -140,7 +144,7 @@ def parseStringList(L):
   if match:
     L = match.group(2)
 
-  return delimitpat.split(L)
+  return [x.lower() for x in delimitpat.split(L)]
 
 # Parse an Excellon tool list file of the form
 #

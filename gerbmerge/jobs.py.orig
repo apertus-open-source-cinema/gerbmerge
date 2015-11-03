@@ -201,22 +201,6 @@ class Job:
     else:
       return float(self.maxy-self.miny)*0.001
 
-  def minx_in(self):
-    "Return minimum x in INCHES"
-    return float(self.minx)*0.00001
-
-  def miny_in(self):
-    "Return minimum y in INCHES"
-    return float(self.miny)*0.00001
-
-  def maxx_in(self):
-    "Return maximum x in INCHES"
-    return float(self.maxx)*0.00001
-
-  def maxy_in(self):
-    "Return maximum y in INCHES"
-    return float(self.maxy)*0.00001
-
   def jobarea(self):
     return self.width_in()*self.height_in()
 
@@ -1248,18 +1232,6 @@ class JobLayout:
 
   def height_in(self):
     return self.job.height_in()
-
-  def minx_in(self):
-    return self.job.minx_in()
-
-  def miny_in(self):
-    return self.job.miny_in()
-
-  def maxx_in(self):
-    return self.job.maxx_in()
-
-  def maxy_in(self):
-    return self.job.maxy_in()
 
   def drillhits(self, diameter):
     tools = self.job.findTools(diameter)

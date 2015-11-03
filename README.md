@@ -2,6 +2,25 @@
 
 <P><HR ALIGN=LEFT></P>
 
+
+
+
+<p>In this latest release</p>
+<ul>
+<li>This version of Gerbmerge is based on the fork from https://github.com/provideyourown/gerbmerge</li>
+<li>In the placement*.txt file after the coordinates you can use "l" (left),"c" (center) or "r" (right) for the X axis and "b" (bottom),"c" (center) or "t" (top) for the Y axis to indicate the origin of each PCB.</li>
+<li>Another letter after the origin indication can be used to define the positon relative to the panel size: "l", "c", "r" or "L", "C", "R" for the X axis</li>
+	<ul>
+	<li>L,C,R correspond to the absolute panel size</li>
+	<li>l,c,r correspond to the panel size corrected by inset values (from *.cfg file)</li>
+	</ul>
+<li>Examples:</li>
+<li>"0cC 0cC" places a PCB exactly in the middle of a panel</li>
+<li>"0rR 0bB" places a PCB in the lower right corner of a panel</li>
+<li>"0rr 0tt" places a PCB in the top right corner by RightInset and TopInset of a panel</li>
+</ul>
+
+
 <H2>What's New</H2>
 <p>In release 1.9</p>
 <ul>

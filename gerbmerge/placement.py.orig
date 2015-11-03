@@ -16,7 +16,6 @@ http://ruggedcircuits.com/gerbmerge
 import sys
 import re
 
-import config
 import parselayout
 import jobs
 
@@ -62,9 +61,7 @@ class Placement:
 
   def addFromFile(self, fname, Jobs):
     """Read placement from a file, placed against jobs in Jobs list"""
-    pat = re.compile(r'\s*(\S+)' + 
-        r'\s+([0-9.,-]+)([lcr]?)([lcrLCR]?)' + 
-        r'\s+([0-9.,-]+)([tcb]?)([tcbTCB]?)')
+    pat = re.compile(r'\s*(\S+)\s+(\S+)\s+(\S+)')
     comment = re.compile(r'\s*(?:#.+)?$')
    
     try:
@@ -84,7 +81,7 @@ class Placement:
         print 'Cannot interpret placement line in placement file:\n  %s' % line
         sys.exit(1)
 
-      jobname, X, rx, Rx, Y, ry, Ry = match.groups()
+      jobname, X, Y = match.groups()
       try:
         X = float(X)
         Y = float(Y)
@@ -107,57 +104,7 @@ class Placement:
             rotated = 270
             jobname = jobname[:-11]
 
-      print "%s [>%s< >%s< >%s<] [>%s< >%s< >%s<] ->" % \
-        (jobname, X, rx, Rx, Y, ry, Ry)
-
       addjob = parselayout.findJob(jobname, rotated, Jobs)
-
-      w, h = addjob.width_in(), addjob.height_in()
-      mx, my = addjob.minx_in(), addjob.miny_in()
-      W = float(config.Config['panelwidth'])
-      H = float(config.Config['panelheight'])
-      Ml, Mr = config.Config['leftinset'], config.Config['rightinset']
-      Mb, Mt = config.Config['bottominset'], config.Config['topinset']
-
-      if rx == 'c':     # center of job
-        X -= w/2.0
-      elif rx == 'r':   # right edge of job
-        X -= w
-      else:             # left edge of job
-        pass
-
-      if Rx == 'C':     # center of panel
-        X += W/2.0
-      elif Rx == 'R':   # right edge of panel
-        X += W
-      elif Rx == 'l':   # left panel margin
-        X += Ml
-      elif Rx == 'c':   # center of panel margins
-        X += (W-Ml-Mr)/2.0 + Ml
-      elif Rx == 'r':   # right panel margin
-        X += W-Mr
-
-      if ry == 'c':     # center of job
-        Y -= h/2.0
-      elif ry == 't':   # top edge of job
-        Y -= h
-      else:
-        pass
-
-      if Ry == 'C':     # center of panel
-        Y += H/2.0
-      elif Ry == 'T':   # top edge of panel
-        Y += H
-      elif Ry == 'b':   # bottom panel margin
-        Y += Mb
-      elif Ry == 'c':   # center of panel margins
-        Y += (H-Mb-Mt)/2.0 + Mb
-      elif Ry == 't':   # top panel margin
-        Y += H-Mt
-
-      print "\t<%f,%f> <%f,%f> {%f,%f,%f,%f} (%f,%f)" % \
-        (w, h, W, H, Ml, Mr, Mb, Mt, X, Y)
-
       addjob.setPosition(X,Y)
       self.jobs.append(addjob)
 
